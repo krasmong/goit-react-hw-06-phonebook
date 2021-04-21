@@ -1,7 +1,7 @@
 import { v1 as uuidv1 } from 'uuid';
 
 export const addContact = (itemsName, itemsNumber) => ({
-  type: 'ADD_CONT',
+  type: 'contact/add',
   payload: {
     id: uuidv1(),
     name: itemsName,
