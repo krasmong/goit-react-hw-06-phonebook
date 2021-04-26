@@ -1,27 +1,34 @@
 import React from 'react';
-import s from './ContactList.module.css';
+// import s from './ContactList.module.css';
 
-// import s from '../ContactList/ContactList.module.css';
+// ================================= 4 hw =======================================
+// ================================= 4 hw =======================================
+// ================================= 4 hw =======================================
 
-const ContactList = ({ contacts, onDeleteContact }) => {
-  // console.log(contacts);
+// import React from 'react';
+// import s from './ContactList.module.css';
 
-  return (
-    <>
-      <ul className={s.list}>
-        {contacts.map(({ id, name, number }) => (
-          <li className={s.item} key={id}>
-            <span className={s.text}> {name} : </span>
-            <span className={s.text}> {number} </span>
+// // import s from '../ContactList/ContactList.module.css';
 
-            <button className={s.btn} onClick={() => onDeleteContact(id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-};
+// const ContactList = ({ contacts, onDeleteContact }) => {
+//   // console.log(contacts);
 
-export default ContactList;
+//   return (
+//     <>
+//       <ul className={s.list}>
+//         {contacts.map(({ id, name, number }) => (
+//           <li className={s.item} key={id}>
+//             <span className={s.text}> {name} : </span>
+//             <span className={s.text}> {number} </span>
+
+//             <button className={s.btn} onClick={() => onDeleteContact(id)}>
+//               Delete
+//             </button>
+//           </li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// };
+
+// export default ContactList;
