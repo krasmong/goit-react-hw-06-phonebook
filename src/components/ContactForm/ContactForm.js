@@ -5,8 +5,6 @@ import { addContact } from '../../redux/contacts/contacts-actions';
 
 import s from '../ContactForm/ContactForm.module.css';
 
-// !!!!!!!??????!!!!!!
-
 class ContactForm extends Component {
   state = {
     contact: { name: '', number: '' },
@@ -17,11 +15,16 @@ class ContactForm extends Component {
   };
 
   handleChange = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
+    console.log(e.target.name);
+    this.setState(prevState => {
+      const { name, value } = e.target;
+      return {
+        contact: { ...prevState.contact, [name]: value },
+      };
+    });
   };
 
-  isGetContact = name => {
+  isContainName = name => {
     name = name.toLowerCase();
     return this.props.state.contacts.items.find(
       e => e.name.toLowerCase() === name,
@@ -31,16 +34,18 @@ class ContactForm extends Component {
   reset = () => this.setState({ contact: { name: '', number: '' } });
 
   handleSubmit = e => {
-    const { onSaveContacts } = this.state;
-    const { contact } = this.state;
     e.preventDefault();
-    this.isGetContact(contact.name)
+    const { onSaveContacts } = this.props;
+    const { contact } = this.state;
+    this.isContainName(contact.name)
       ? alert(`Contact ${contact.name} already exists.`)
       : onSaveContacts(contact);
     this.reset();
   };
 
   render() {
+    const { contact } = this.state;
+    const { handleChange } = this;
     return (
       <div className={s.container}>
         <form onSubmit={this.handleSubmit}>
@@ -50,8 +55,8 @@ class ContactForm extends Component {
               className={s.input}
               type="text"
               name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
+              value={contact.name}
+              onChange={handleChange}
             />
           </label>
           <label className={s.label}>
@@ -60,8 +65,8 @@ class ContactForm extends Component {
               className={s.input}
               type="text"
               name="number"
-              value={this.state.number}
-              onChange={this.handleChange}
+              value={contact.number}
+              onChange={handleChange}
             />
           </label>
 
@@ -69,19 +74,18 @@ class ContactForm extends Component {
             Add contact
           </button>
         </form>
-        {/* ContactForm */}
       </div>
     );
   }
 }
 
-// const mapStateToProps = state => ({ state });
+const mapStateToProps = state => ({ state });
 
-const mapDispatchToProps = dispatch => ({
-  onSaveContacts: contact => dispatch(addContact(contact)),
-});
+const mapDispatchToProps = dispatch => {
+  return { onSaveContacts: contact => dispatch(addContact(contact)) };
+};
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
 
 // ================================= 4 hw =======================================
 
