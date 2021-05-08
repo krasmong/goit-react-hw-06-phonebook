@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/contacts-actions';
 import s from './ContactList.module.css';
 
-const ContactList = ({ filterContactsByName, onDeleteContact }) => {
-  console.log(filterContactsByName);
+const ContactList = ({ visibleContacts, onDeleteContact }) => {
+  // console.log(filterContactsBgetFName);
   return (
     <ul className={s.list}>
-      {filterContactsByName.map(({ id, name, number }) => {
+      {visibleContacts.map(({ id, name, number }) => {
         return (
           <li className={s.item} key={id}>
             <span className={s.text}> {name} : </span>
@@ -23,7 +23,7 @@ const ContactList = ({ filterContactsByName, onDeleteContact }) => {
   );
 };
 
-const filterContactsByName = (allContacts, filter) => {
+const getFilterContactsByName = (allContacts, filter) => {
   const normalizedFilter = filter.toLocaleLowerCase();
 
   return allContacts.filter(({ name }) =>
@@ -32,7 +32,7 @@ const filterContactsByName = (allContacts, filter) => {
 };
 
 const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  filterContactsByName: filterContactsByName(items, filter),
+  visibleContacts: getFilterContactsByName(items, filter),
 });
 
 const mapDispatchToProps = dispatch => {
