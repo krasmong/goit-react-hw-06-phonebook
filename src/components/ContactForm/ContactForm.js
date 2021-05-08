@@ -24,7 +24,7 @@ class ContactForm extends Component {
     });
   };
 
-  isContainName = name => {
+  isContactExists = name => {
     name = name.toLowerCase();
     return this.props.state.contacts.items.find(
       e => e.name.toLowerCase() === name,
@@ -37,7 +37,7 @@ class ContactForm extends Component {
     e.preventDefault();
     const { onSaveContacts } = this.props;
     const { contact } = this.state;
-    this.isContainName(contact.name)
+    this.isContactExists(contact.name)
       ? alert(`Contact ${contact.name} already exists.`)
       : onSaveContacts(contact);
     this.reset();

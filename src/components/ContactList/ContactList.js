@@ -1,22 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import s from './ContactList.module.css';
 import { deleteContact } from '../../redux/contacts/contacts-actions';
+import s from './ContactList.module.css';
 
-const ContactList = ({ filtredContacts, onDeleteContact }) => {
-  console.log(filtredContacts);
+const ContactList = ({ filterContactsByName, onDeleteContact }) => {
+  console.log(filterContactsByName);
   return (
     <ul className={s.list}>
-      {filtredContacts.map(({ id, name, number }) => (
-        <li className={s.item} key={id}>
-          <span className={s.text}> {name} : </span>
-          <span className={s.text}> {number} </span>
-          <button className={s.btn} onClick={() => onDeleteContact(id)}>
-            Delete
-          </button>
-        </li>
-      ))}
+      {filterContactsByName.map(({ id, name, number }) => {
+        return (
+          <li className={s.item} key={id}>
+            <span className={s.text}> {name} : </span>
+            <span className={s.text}> {number} </span>
+            <button className={s.btn} onClick={() => onDeleteContact(id)}>
+              Delete
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 };
@@ -28,18 +30,9 @@ const filterContactsByName = (allContacts, filter) => {
     name.toLocaleLowerCase().includes(normalizedFilter),
   );
 };
-// !!!!!!!!!!!!!!?
-// const filtredContacts = (filter, contacts) => {
-//   // const { contacts } = this.state;
-//   const normalizedFilter = this.state.filter.toLowerCase();
-//   const filtredContacts = contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(normalizedFilter),
-//   );
-//   return filtredContacts;
-// };
 
 const mapStateToProps = ({ contacts: { items, filter } }) => ({
-  contacts: filterContactsByName(items, filter),
+  filterContactsByName: filterContactsByName(items, filter),
 });
 
 const mapDispatchToProps = dispatch => {
