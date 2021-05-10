@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { changeFilter } from '../../redux/contacts/contacts-actions';
 import s from './Filter.module.css';
 

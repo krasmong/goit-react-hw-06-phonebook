@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addContact } from '../../redux/contacts/contacts-actions';
-
 import s from '../ContactForm/ContactForm.module.css';
 
 class ContactForm extends Component {

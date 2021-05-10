@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { deleteContact } from '../../redux/contacts/contacts-actions';
 import s from './ContactList.module.css';
 
@@ -25,7 +24,6 @@ const ContactList = ({ visibleContacts, onDeleteContact }) => {
 
 const getFilterContactsByName = (allContacts, filter) => {
   const normalizedFilter = filter.toLocaleLowerCase();
-
   return allContacts.filter(({ name }) =>
     name.toLocaleLowerCase().includes(normalizedFilter),
   );
